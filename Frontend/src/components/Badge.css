@@ -1,0 +1,23 @@
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f5f9;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.badge-icon {
+  font-size: 28px;
+}
+
+.badge-text h4 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.badge-text p {
+  font-size: 12px;
+  margin: 0;
+  color: #64748b;
+}

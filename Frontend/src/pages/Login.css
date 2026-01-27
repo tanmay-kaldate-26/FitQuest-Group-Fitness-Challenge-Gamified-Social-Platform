@@ -1,0 +1,108 @@
+/* Full page */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #eef2f7, #f8fbff);
+}
+
+/* Center container */
+.login-wrapper {
+  display: flex;
+  width: 900px;
+  height: 520px;
+  gap: 40px;
+}
+
+/* LEFT CARD */
+.login-image-card {
+  flex: 1;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.login-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Quote over image */
+.login-quote {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: white;
+  font-size: 16px;
+}
+
+/* RIGHT CARD */
+.login-form-card {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Text */
+.app-name {
+  text-align: center;
+}
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 25px;
+  color: gray;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+/* Options */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 10px 0 20px;
+}
+
+.forgot {
+  color: #2563eb;
+  cursor: pointer;
+}
+
+/* Button */
+.login-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(to right, #2563eb, #10b981);
+}
+
+/* Register */
+.register-text {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-text span {
+  color: #2563eb;
+  cursor: pointer;
+}

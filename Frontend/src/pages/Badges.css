@@ -1,0 +1,179 @@
+.badges-page {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.badges-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 24px;
+}
+
+/* Header */
+.badges-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.badges-header h1 {
+  font-size: 28px;
+  color: #0f172a;
+  margin: 0;
+}
+
+.badge-counter {
+  background: white;
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.count-num {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* Grid */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.badge-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Locked State */
+.badge-card.locked {
+  opacity: 0.7;
+  background: #f8fafc;
+}
+
+.badge-card.locked .badge-icon-circle {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+/* Unlocked Hover */
+.badge-card.unlocked:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: #bfdbfe;
+}
+
+/* Icons */
+.badge-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+/* Color Themes */
+.badge-card.blue .badge-icon-circle {
+  background: #eff6ff;
+  color: #2563eb;
+  border-color: #dbeafe;
+}
+
+.badge-card.orange .badge-icon-circle {
+  background: #fff7ed;
+  color: #f97316;
+  border-color: #ffedd5;
+}
+
+.badge-card.red .badge-icon-circle {
+  background: #fef2f2;
+  color: #ef4444;
+  border-color: #fee2e2;
+}
+
+.badge-card.green .badge-icon-circle {
+  background: #f0fdf4;
+  color: #22c55e;
+  border-color: #dcfce7;
+}
+
+.badge-card.purple .badge-icon-circle {
+  background: #faf5ff;
+  color: #a855f7;
+  border-color: #f3e8ff;
+}
+
+.badge-card.pink .badge-icon-circle {
+  background: #fdf2f8;
+  color: #ec4899;
+  border-color: #fce7f3;
+}
+
+.badge-card.yellow .badge-icon-circle {
+  background: #fefce8;
+  color: #eab308;
+  border-color: #fef9c3;
+}
+
+/* Text */
+.badge-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.badge-content p {
+  margin: 0 0 20px 0;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Footer Pills */
+.badge-footer {
+  margin-top: auto;
+}
+
+.status-pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pill.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pill.locked-pill {
+  background: #e2e8f0;
+  color: #64748b;
+}

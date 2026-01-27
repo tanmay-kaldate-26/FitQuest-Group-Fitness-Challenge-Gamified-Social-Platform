@@ -1,0 +1,252 @@
+/* src/pages/Challenges.css */
+
+.challenges-page {
+  background-color: #F8FAFC;
+  min-height: 100vh;
+}
+
+.challenges-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* Header */
+.challenges-header h1 {
+  font-size: 28px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.challenges-header p {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+/* Search Bar */
+.search-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.search-wrapper {
+  flex: 1;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.search-wrapper input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  width: 100%;
+  color: #334155;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f1f5f9;
+}
+
+/* Filter Pills */
+.filter-pills {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  border: none;
+  background: #e2e8f0;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pill:hover {
+  background: #cbd5e1;
+}
+
+.pill.active {
+  background: #0EA5E9; /* Brand Blue */
+  color: white;
+}
+
+/* --- GRID LAYOUT --- */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+}
+
+.text-btn {
+    background: none;
+    border: none;
+    color: #0EA5E9;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* --- CARD DESIGN --- */
+.challenge-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.challenge-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Area */
+.card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Badges on Image */
+.badge-left {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f172a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-right {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-new { background: rgba(16, 185, 129, 0.9); color: white; } /* Green */
+.status-joined { background: rgba(59, 130, 246, 0.9); color: white; } /* Blue */
+
+/* Content Body */
+.card-body {
+  padding: 20px;
+}
+
+.card-body h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.card-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Full Width Button at Bottom */
+.card-action-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-join {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.btn-join:hover {
+  background: #e2e8f0;
+}
+
+.btn-joined {
+  background: #ecfdf5; /* Light Green */
+  color: #059669; /* Dark Green Text */
+  cursor: default;
+}
+
+/* --- FAB BUTTON (Bottom Right) --- */
+.fab-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 64px;
+  height: 64px;
+  background-color: #0EA5E9; /* Brand Blue */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 32px;
+  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  transition: transform 0.2s;
+  z-index: 100;
+}
+
+.fab-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+  background-color: #0284C7;
+}

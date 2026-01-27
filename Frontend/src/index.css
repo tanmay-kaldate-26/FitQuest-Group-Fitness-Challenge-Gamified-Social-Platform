@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ✅ Apply the font to everything */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc; /* Matches your Figma background */
+  color: #0f172a; /* Matches your Figma dark text */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ✅ Optional: Make headings pop like in the design */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.025em; /* Tighter letter spacing for that "modern" feel */
+}
+
+/* html,
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+} */
+
+
+:root {
+  --primary-blue: #2563eb;
+  --primary-green: #10b981;
+  --bg-light: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-light: #e5e7eb;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+}
+
+/* Smooth page fade */
+main {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button tap feedback */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Card hover lift */
+.challenge-card,
+.challenge-info,
+.challenge-progress {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.challenge-card:hover,
+.challenge-info:hover,
+.challenge-progress:hover {
+  transform: translateY(-4px);
+}

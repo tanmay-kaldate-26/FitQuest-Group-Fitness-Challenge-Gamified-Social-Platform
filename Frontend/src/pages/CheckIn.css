@@ -1,0 +1,163 @@
+.checkin-page {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ✅ NEW BACK BUTTON STYLE */
+.back-nav {
+  color: #64748b;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.back-nav:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+.checkin-header h1 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.checkin-header p {
+  color: #64748b;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.checkin-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.date-card {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.checkin-form-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.checkin-form-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.checkin-form-card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+  margin-top: 15px;
+}
+
+.checkin-form-card input,
+.checkin-form-card textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 15px;
+}
+
+.submit-btn {
+  margin-top: 25px;
+  width: 100%;
+  background: #10b981; /* Green */
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #059669;
+}
+
+.history-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.history-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-card th {
+  text-align: left;
+  padding-bottom: 15px;
+  color: #64748b;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.history-card td {
+  padding: 15px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+}
+
+.points-badge {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Right Side */
+.streak-card {
+  background: linear-gradient(135deg, #f97316, #ea580c); /* Orange */
+  color: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  position: sticky;
+  top: 20px;
+}
+
+.streak-card h1 {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .checkin-layout {
+    grid-template-columns: 1fr;
+  }
+}

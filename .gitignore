@@ -1,0 +1,19 @@
+# --- GLOBAL ---
+.DS_Store
+*.zip
+*.rar
+*.log
+
+# --- FRONTEND (React) ---
+Frontend/node_modules/
+Frontend/dist/
+Frontend/build/
+Frontend/.env
+Frontend/.env.local
+
+# --- BACKEND (Java/Spring Boot) ---
+backend/target/
+backend/.mvn/wrapper/
+backend/.idea/
+backend/*.iml
+backend/help.md
