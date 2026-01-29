@@ -28,7 +28,7 @@ export default function CreateChat() {
     
     setLoading(true);
     try {
-      await api.post("/challenges/group", {
+      await api.post("/chat/group", {
         name: groupName,
         description: "Chat Group",
         goalType: "STEPS", 

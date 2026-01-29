@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public interface DailyCheckinRepository extends JpaRepository<DailyCheckin, Long> {
 
-    // 1. Core Finders
     Optional<DailyCheckin> findByChallengeIdAndUserIdAndCheckinDate(
             Long challengeId, Long userId, LocalDate checkinDate
     );
@@ -20,23 +19,12 @@ public interface DailyCheckinRepository extends JpaRepository<DailyCheckin, Long
 
     long countByUserId(Long userId);
 
-    // ----------------------------------------------------------------
-    // SECTION 1: METHODS FOR DASHBOARD (Restored!)
-    // ----------------------------------------------------------------
-
-    // Used by DashboardService to show Total Points
     @Query("SELECT COALESCE(SUM(d.pointsEarned), 0) FROM DailyCheckin d WHERE d.userId = :userId")
     Integer calculateTotalPoints(@Param("userId") Long userId);
 
-    // Used by DashboardService to calculate Streak
     @Query("SELECT DISTINCT d.checkinDate FROM DailyCheckin d WHERE d.userId = :userId ORDER BY d.checkinDate DESC")
     List<LocalDate> findCheckinDates(@Param("userId") Long userId);
 
-    // ----------------------------------------------------------------
-    // SECTION 2: METHODS FOR CHECK-IN & CHALLENGES
-    // ----------------------------------------------------------------
-
-    // Used by ChallengeService
     @Query("""
     SELECT 
         d.checkinDate,
@@ -50,18 +38,16 @@ public interface DailyCheckinRepository extends JpaRepository<DailyCheckin, Long
     """)
     List<Object[]> getDailyProgress(@Param("challengeId") Long challengeId, @Param("userId") Long userId);
 
-    // Used by DailyCheckinService for Calendar
-    @Query("""
-    SELECT
-        d.checkinDate AS checkinDate,
-        SUM(d.pointsEarned) AS totalPoints,
-        0 AS totalValue 
-    FROM DailyCheckin d
-    WHERE d.userId = :userId
-    AND d.checkinDate >= :startDate
-    GROUP BY d.checkinDate
-    """)
-    List<DailyCheckinAggregate> findCalendarData(@Param("userId") Long userId, @Param("startDate") LocalDate startDate);
+    @Query("SELECT c.checkinDate as checkinDate, SUM(c.pointsEarned) as totalPoints " +
+            "FROM DailyCheckin c " +
+            "WHERE c.userId = :userId AND c.checkinDate >= :startDate " +
+            "GROUP BY c.checkinDate")
+    List<DailyCheckinAggregate> findCalendarData(@Param("userId") Long userId,
+                                                 @Param("startDate") LocalDate startDate);
+
+    // ✅ Used to calculate Total Distance for Profile
+    @Query("SELECT COALESCE(SUM(d.distance), 0) FROM DailyCheckin d WHERE d.userId = :userId")
+    Double getTotalDistance(@Param("userId") Long userId);
 
     List<DailyCheckin> findTop10ByUserIdOrderByCheckinDateDesc(Long userId);
 }

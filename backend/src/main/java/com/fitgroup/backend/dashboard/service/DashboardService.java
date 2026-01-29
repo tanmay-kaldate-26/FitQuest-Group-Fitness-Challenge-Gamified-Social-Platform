@@ -28,7 +28,6 @@ public class DashboardService {
     private final ChallengeParticipantRepository participantRepository;
     private final UserBadgeRepository userBadgeRepository;
     private final BadgeRepository badgeRepository;
-    // ✅ ADDED: Needed to fetch Challenge details using the ID
     private final ChallengeRepository challengeRepository;
 
     public DashboardStatsResponse getUserStats(Long userId) {
@@ -50,7 +49,6 @@ public class DashboardService {
         List<DashboardChallengeDto> completedList = new ArrayList<>();
 
         participantRepository.findByUserId(userId).forEach(p -> {
-            // ✅ FIX: Use Repository to find the Challenge Object by ID
             Long challengeId = p.getChallengeId();
             Optional<Challenge> challengeOpt = challengeRepository.findById(challengeId);
 
@@ -61,16 +59,27 @@ public class DashboardService {
                 long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), c.getEndDate());
                 int daysLeft = (int) Math.max(0, daysBetween);
 
+                // ✅ NEW LOGIC: Calculate Progress based on User Points vs Target Points
+                // (Target = ~50 points per day for the challenge duration)
+                long duration = ChronoUnit.DAYS.between(c.getStartDate(), c.getEndDate());
+                if (duration < 1) duration = 1;
+
+                long targetPoints = duration * 50;
+                int userPoints = p.getTotalPoints(); // Get points from the participant record
+
+                // Calculate % (Max 100%)
+                int progressPercent = (int) Math.min(100, (userPoints * 100.0) / targetPoints);
+
                 // Map to DTO
                 DashboardChallengeDto dto = DashboardChallengeDto.builder()
                         .id(c.getId())
                         .name(c.getName())
                         .participants(participantRepository.countByChallengeId(c.getId()))
                         .daysLeft(daysLeft)
-                        .progress(calculateProgress(c))
+                        .progress(progressPercent) // ✅ SEND CORRECT %
                         .build();
 
-                if (c.getEndDate().isAfter(LocalDate.now())) {
+                if (c.getEndDate().isAfter(LocalDate.now()) && c.getIsActive()) {
                     activeList.add(dto);
                 } else {
                     completedList.add(dto);
@@ -80,21 +89,12 @@ public class DashboardService {
 
         return DashboardStatsResponse.builder()
                 .totalPoints(user.getTotalPoints())
-                .streak(user.getCurrentStreak())
+                .streak(user.getCurrentStreak() != null ? user.getCurrentStreak() : 0)
                 .globalRank(rank)
                 .activeChallengesCount(activeList.size())
                 .badges(badgeCodes)
                 .activeChallenges(activeList)
                 .completedChallenges(completedList)
                 .build();
-    }
-
-    private int calculateProgress(Challenge c) {
-        long totalDays = ChronoUnit.DAYS.between(c.getStartDate(), c.getEndDate());
-        long daysPassed = ChronoUnit.DAYS.between(c.getStartDate(), LocalDate.now());
-
-        if (totalDays <= 0) return 100;
-        int prog = (int) ((double) daysPassed / totalDays * 100);
-        return Math.min(100, Math.max(0, prog));
     }
 }

@@ -15,4 +15,6 @@ public class UserProfileResponse {
     private int totalPoints;
     private int currentStreak;
     private int challengesCompleted;
+    private int totalChallenges;
+    private int daysActive;
 }

@@ -2,12 +2,16 @@ import "./CheckIn.css";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ Import useLocation
 
 export default function CheckIn() {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate();
+  const location = useLocation(); // ✅ Access state passed from ChallengeDetails
   
-  // State for form
+  // 1. Check if we are checking in for a specific challenge
+  const challengeData = location.state || {}; 
+  const { challengeId, challengeName } = challengeData;
+
   const [formData, setFormData] = useState({
     distance: "",
     time: "",
@@ -16,35 +20,24 @@ export default function CheckIn() {
 
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
-  
-  const [stats, setStats] = useState({
-    streak: 0
-  });
+  const [stats, setStats] = useState({ streak: 0 });
 
-  // 1. Fetch Streak Stats on Load
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const response = await api.get("/dashboard/stats");
-        setStats({
-          streak: response.data.streak
-        });
+        setStats({ streak: response.data.streak });
       } catch (error) {
         console.error("Failed to fetch stats", error);
       }
     };
-
     fetchStats();
-  }, []);
-
-  // 2. Fetch History on Load
-  useEffect(() => {
     fetchHistory();
   }, []);
 
   const fetchHistory = async () => {
     try {
-      const response = await api.get("/checkin/history");
+      const response = await api.get("/daily-checkins/history");
       setHistory(response.data);
     } catch (error) {
       console.error("Failed to load history", error);
@@ -60,8 +53,9 @@ export default function CheckIn() {
     setLoading(true);
 
     try {
-      const response = await api.post("/checkin", {
-        challengeId: null,
+      const response = await api.post("/daily-checkins", {
+        // ✅ INCLUDE CHALLENGE ID IF PRESENT
+        challengeId: challengeId || null, 
         distance: parseFloat(formData.distance) || 0,
         time: parseInt(formData.time) || 0,
         notes: formData.notes
@@ -72,8 +66,12 @@ export default function CheckIn() {
       fetchHistory(); 
       const statsRes = await api.get("/dashboard/stats");
       setStats({ streak: statsRes.data.streak });
-      
       setFormData({ distance: "", time: "", notes: "" });
+
+      // ✅ Redirect back to challenge if applicable
+      if (challengeId) {
+          navigate(`/challenges/${challengeId}`);
+      }
 
     } catch (error) {
       console.error("Check-in failed", error);
@@ -89,13 +87,13 @@ export default function CheckIn() {
       <Navbar />
       <main className="checkin-page">
         
-        {/* ✅ BACK BUTTON ADDED HERE */}
         <div className="back-nav" onClick={() => navigate("/dashboard")}>
           ← Back to Dashboard
         </div>
 
         <header className="checkin-header">
-          <h1>Daily Check-In</h1>
+          {/* ✅ Dynamic Header */}
+          <h1>{challengeId ? `Log Activity for "${challengeName}"` : "Daily Check-In"}</h1>
           <p>Track your progress and keep your streak alive!</p>
         </header>
 
@@ -124,7 +122,7 @@ export default function CheckIn() {
                 value={formData.notes} onChange={handleChange}
               />
               <button className="submit-btn" onClick={handleSubmit} disabled={loading}>
-                {loading ? "Checking In..." : "Submit Check-In"}
+                {loading ? "Checking In..." : (challengeId ? "Submit Challenge Entry" : "Submit Check-In")}
               </button>
             </div>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ChatProvider } from "./context/ChatContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -9,7 +10,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <AuthProvider>
         <ChatProvider>
           <ThemeProvider>
@@ -17,7 +18,7 @@ root.render(
           </ThemeProvider>
         </ChatProvider>
       </AuthProvider>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </BrowserRouter>
 );
 

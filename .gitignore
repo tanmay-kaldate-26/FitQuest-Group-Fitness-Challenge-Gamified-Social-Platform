@@ -17,3 +17,4 @@ backend/.mvn/wrapper/
 backend/.idea/
 backend/*.iml
 backend/help.md
+node_modules

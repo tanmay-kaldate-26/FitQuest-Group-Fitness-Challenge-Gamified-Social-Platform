@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.fitgroup.backend.challenge.dto.ChallengeParticipantResponse;
 import com.fitgroup.backend.user.entity.User;
+import com.fitgroup.backend.badges.service.BadgeAwardService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class ChallengeService {
     private final BadgeRuleEngine badgeRuleEngine;
     private final DailyCheckinRepository dailyCheckinRepository;
     private final UserRepository userRepository;
+    private final BadgeAwardService badgeAwardService;
 
     // -------------------------------------------------------------
     // CREATE PERSONAL CHALLENGE
@@ -76,6 +78,7 @@ public class ChallengeService {
 
 
         badgeRuleEngine.onChallengeCreated(userId);
+        badgeAwardService.awardCreatorBadge(userId);
     }
 
     // -------------------------------------------------------------
@@ -117,6 +120,7 @@ public class ChallengeService {
         );
 
         badgeRuleEngine.onChallengeCreated(userId);
+        badgeAwardService.awardCreatorBadge(userId);
     }
 
     // -------------------------------------------------------------

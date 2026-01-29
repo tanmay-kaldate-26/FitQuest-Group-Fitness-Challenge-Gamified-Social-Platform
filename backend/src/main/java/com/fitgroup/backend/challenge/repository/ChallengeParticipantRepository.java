@@ -1,14 +1,23 @@
 package com.fitgroup.backend.challenge.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.fitgroup.backend.challenge.entity.ChallengeParticipant;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import com.fitgroup.backend.challenge.entity.Challenge;
+import org.springframework.data.repository.query.Param;
 import java.util.List;
+import java.util.Optional; // ✅ Import Optional
 
 public interface ChallengeParticipantRepository extends JpaRepository<ChallengeParticipant, Long> {
 
+    // ✅ NEW: Find specific participant record to update points
+    Optional<ChallengeParticipant> findByChallengeIdAndUserId(Long challengeId, Long userId);
 
+    int countByUserId(Long userId);
+    boolean existsByChallengeIdAndUserId(Long challengeId, Long userId);
+    int countByChallengeId(Long challengeId);
+    List<ChallengeParticipant> findByUserId(Long userId);
+    List<ChallengeParticipant> findByChallengeId(Long challengeId);
+    List<ChallengeParticipant> findByChallengeIdOrderByTotalPointsDesc(Long challengeId);
 
     @Query("""
     SELECT cp, c
@@ -16,17 +25,7 @@ public interface ChallengeParticipantRepository extends JpaRepository<ChallengeP
     JOIN Challenge c ON cp.challengeId = c.id
     WHERE cp.userId = :userId AND c.isDeleted = false
     """)
-    List<Object[]> findAllByUserWithChallenges(Long userId);
-
-    boolean existsByChallengeIdAndUserId(Long challengeId, Long userId);
-
-    // ✅ ADD THIS: Find all challenges a user has joined (for Dashboard)
-    List<ChallengeParticipant> findByUserId(Long userId);
-
-    // ✅ ADD THIS: Count how many people are in a specific challenge
-    int countByChallengeId(Long challengeId);
-
-    
+    List<Object[]> findAllByUserWithChallenges(@Param("userId") Long userId);
 
     @Query("""
     SELECT cp, u.fullName
@@ -35,12 +34,5 @@ public interface ChallengeParticipantRepository extends JpaRepository<ChallengeP
     WHERE cp.challengeId = :challengeId
     ORDER BY cp.totalPoints DESC, cp.maxStreak DESC, cp.joinedAt ASC
     """)
-    List<Object[]> findLeaderboard(Long challengeId);
-
-    List<ChallengeParticipant> findByChallengeId(Long challengeId);
-
-    List<ChallengeParticipant> findByChallengeIdOrderByTotalPointsDesc(Long challengeId);
-
-
+    List<Object[]> findLeaderboard(@Param("challengeId") Long challengeId);
 }
-

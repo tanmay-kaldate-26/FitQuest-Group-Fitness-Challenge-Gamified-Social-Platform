@@ -2,6 +2,8 @@ package com.fitgroup.backend.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -53,6 +55,10 @@ public class User {
 
     @Column(updatable = false)
     private LocalDateTime joinedAt;
+
+    private int daysActive = 1;
+
+    private LocalDate lastCheckInDate;
 
     @PrePersist
     protected void onCreate() {

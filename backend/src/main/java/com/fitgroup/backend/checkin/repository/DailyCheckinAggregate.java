@@ -5,5 +5,5 @@ import java.time.LocalDate;
 public interface DailyCheckinAggregate {
     LocalDate getCheckinDate();
     Integer getTotalPoints();
-    Integer getTotalValue();
+//    Integer getTotalValue();
 }

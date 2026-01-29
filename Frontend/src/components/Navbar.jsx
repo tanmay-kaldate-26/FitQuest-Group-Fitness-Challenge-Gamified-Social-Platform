@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { useTheme } from "../context/ThemeContext"; // ✅ Import Context
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -17,9 +18,12 @@ export default function Navbar() {
   return (
     <nav className="navbar" style={{backgroundColor: 'var(--bg-card)', borderBottom: '1px solid var(--border-color)'}}>
       <div className="navbar-container">
-        <div className="navbar-brand" onClick={() => navigate("/dashboard")}>
-          <div className="brand-logo">🏋️</div>
-          <span style={{color: 'var(--text-primary)'}}>FitQuest</span>
+       <div className="navbar-brand" onClick={() => navigate("/dashboard")}>
+          <img src={logo} alt="FitQuest Logo" className="brand-logo" />
+          <span className="brand-text">
+            <span className="text-fit">Fit</span>
+            <span className="text-quest">Quest</span>
+          </span>
         </div>
 
         <div className="navbar-links">

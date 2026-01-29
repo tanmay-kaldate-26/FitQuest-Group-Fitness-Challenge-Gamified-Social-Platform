@@ -33,15 +33,15 @@ export default function CreateChallenge() {
         name: formData.name,
         description: formData.description,
         type: formData.type,
-        visibility: formData.visibility,
-        goalType: formData.goalType,
+        visibility: formData.visibility.toUpperCase(),
+        goalType: formData.goalType.toUpperCase(),
         targetValue: parseFloat(formData.targetValue),
         startDate: formData.startDate,
         endDate: formData.endDate,
         ...(formData.maxParticipants ? { participantCount: parseInt(formData.maxParticipants) } : {}) 
       };
 
-      await api.post("/challenges/group", payload);
+      await api.post("/challenges/create", payload);
       alert("Challenge created successfully! 🎉");
       navigate("/challenges");
     } catch (error) {

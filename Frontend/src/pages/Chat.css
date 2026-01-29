@@ -290,3 +290,33 @@
   margin-bottom: 20px;
   opacity: 0.5;
 }
+
+/* Delete Button Styles */
+.delete-chat-btn {
+  background: none;
+  border: none;
+  color: #ef4444; /* Bright Red Color */
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%; /* Circular hover effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.7; /* Slightly faded normally */
+}
+
+.delete-chat-btn:hover {
+  background-color: rgba(239, 68, 68, 0.15); /* Light red background on hover */
+  color: #dc2626; /* Darker red icon */
+  opacity: 1;
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Ensure the chat name row aligns properly */
+.chat-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

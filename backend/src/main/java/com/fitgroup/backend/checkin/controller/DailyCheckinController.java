@@ -1,18 +1,22 @@
 package com.fitgroup.backend.checkin.controller;
 
+import com.fitgroup.backend.checkin.dto.CheckinCalendarDayResponse;
 import com.fitgroup.backend.checkin.dto.DailyCheckinRequest;
 import com.fitgroup.backend.checkin.service.DailyCheckinService;
 import com.fitgroup.backend.checkin.entity.DailyCheckin;
+import com.fitgroup.backend.user.entity.User;
 import com.fitgroup.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import com.fitgroup.backend.checkin.entity.DailyCheckin;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/checkin")
+@RequestMapping("/api/daily-checkins")
 @RequiredArgsConstructor
 public class DailyCheckinController {
 
@@ -46,4 +50,15 @@ public class DailyCheckinController {
 
         return ResponseEntity.ok(checkinService.getRecentCheckins(userId));
     }
+
+    @GetMapping("/calendar")
+    public ResponseEntity<List<CheckinCalendarDayResponse>> getCalendar(
+            @RequestParam(defaultValue = "365") int days,
+            Principal principal
+    ) {
+        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
+        return ResponseEntity.ok(checkinService.getCalendar(user.getId(), days));
+    }
+
+
 }
